@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Exemple N°4</title>
+<script>
+function submitForm(form) {
+	var color = document.querySelector('input[name="color"]:checked')?.value;
+	var text = document.getElementById("text")?.value;
+	var xmlhttp = new XMLHttpRequest();
+	xmlhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			document.getElementById("response").innerHTML = this.responseText;
+		}
+	};
+	xmlhttp.open("GET", "exemple4Back.php?color=" + color + "&text=" + text, true);
+	xmlhttp.send();
+	
+	return false;
+}
+</script>
+</head>
+<body>
+<!-- Debut du formulaire -->
+<form action="" onsubmit="return submitForm(this);">
+    <fieldset>
+        <legend>Formulaire</legend>
+            <p>
+                <label>Envoyer les données :</label>
+                <input name="text" id="text" type="text" />
+				<br>
+				<input name="color" type="radio" value="green"/>vert
+				<input name="color" type="radio" value="red" />rouge
+				<br>
+                <input type="submit" name="submit" value="envoyé" />
+            </p>
+    </fieldset>
+</form>
+<!-- Fin du formulaire -->
+<!-- Réponse -->
+<fieldset>
+        <legend>Réponse</legend>
+		<div id="response">
+
+		</div>
+</fieldset>
+<!-- Fin de réponse -->
+</body>
+</html>
